@@ -1,4 +1,7 @@
 import 'package:details_coffee/detailScreen.dart';
+import 'package:details_coffee/detailsCoffeeWidget.dart';
+import 'package:details_coffee/itemStoreCoffee.dart';
+import 'package:details_coffee/storeCoffee.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Store Coffee'),
     );
   }
 }
@@ -34,6 +37,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  List<StoreCoffee> storeCoffees = [];
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -41,153 +46,51 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   @override
+  void initState(){
+    super.initState();
+    _initData();
+  }
+
+  void _initData(){
+    var storeCoffee1 = new StoreCoffee(1, 'https://file.hstatic.net/1000075078/file/dan-tran-hung-dao4_96fa789dd3fc40a3a89bf6285656305d.jpg', 'DAN Trần Hưng Đạo', '461 Trần Hưng Đạo, An Hải Trung, Sơn Trà, Đà Nẵng');
+    storeCoffees.add(storeCoffee1);
+    var storeCoffee2 = new StoreCoffee(2, 'https://file.hstatic.net/1000075078/file/nvl5_488d3e13fdfb4f59acb7caef8ecd038d.jpg', 'DAN Nguyễn Văn Linh', 'Lô A4 - 2 Nguyễn Văn Linh, Bình Hiên, Hải Châu, Đà Nẵng');
+    storeCoffees.add(storeCoffee2);
+    var storeCoffee3 = new StoreCoffee(3, 'https://file.hstatic.net/1000075078/file/nui_thanh-01_e95ba3403fbd4af09627ff372152ec5c.jpg', 'DAN Núi Thành', '01 Núi Thành, Phường, Hải Châu, Đà Nẵng');
+    storeCoffees.add(storeCoffee3);
+    var storeCoffee4 = new StoreCoffee(4, 'https://file.hstatic.net/1000075078/file/dan-trieu-nu-vuong6_3b89f0914d9648eea90b506af2749a53.jpg', 'DAN Triệu Nữ Vương', '9 Triệu Nữ Vương, Hải Châu 2, Hải Châu, Đà Nẵng');
+    storeCoffees.add(storeCoffee4);
+    var storeCoffee5 = new StoreCoffee(5, 'https://file.hstatic.net/1000075078/file/btproduction__3_of_67__9cee430319024581ab0e26a23ff7db83.jpg', 'DAN Nguyễn Chí Thanh', '80A Nguyễn Chí Thanh, Hải Châu 1, Hải Châu, Đà Nẵng');
+    storeCoffees.add(storeCoffee5);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        //   title: Text(widget.title),
-        // ),
-        body: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.network(
-          'https://file.hstatic.net/1000075078/file/nui_thanh-02_a28eb0a0649045f89c0e1789d99e1dc9.jpg',
-          height: 400,
-          fit: BoxFit.fill,
+        appBar: AppBar(
+          backgroundColor: Colors.orangeAccent,
+          title: Text(widget.title, style: TextStyle(color: Colors.white.withOpacity(0.9)),),
         ),
-        FractionallySizedBox(
-          widthFactor: 1.0,
-          child: Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(
-                color: Colors.black26,
-              )),
+        body: Container(
+          color: Colors.orangeAccent.withOpacity(0.4),
+          child: GridView.builder(
+            padding: EdgeInsets.only(top: 16, right: 8, left: 8),
+            itemCount: storeCoffees.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'THE COFFEE HOUSE',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black54),
-                ),
-                Text('DAN Núi Thành',
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                Text('Giờ mở cửa: 07:00 - 22:00',
-                    style: TextStyle(color: Colors.black87))
-              ],
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 10, bottom: 10, left: 2, right: 2),
-          child: Row(
-            children: [
-              Stack(alignment: Alignment.center, children: [
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                      color: Colors.black12,
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.near_me_outlined))
-              ]),
-              Expanded(
-                  child: Text('1 Nút Thành, Quận Hải Châu, Đà Nẵng, Việt Nam',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ))),
-              // Divider(height: 10, thickness: 5, indent: 40, endIndent: 20, color: Colors.black,),
-            ],
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 10, bottom: 10, left: 2, right: 2),
-          child: Row(
-            children: [
-              Stack(alignment: Alignment.center, children: [
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                      color: Colors.black12,
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite_border),
-                )
-              ]),
-              Container(
-                  padding: EdgeInsets.only(left: 4),
-                  child: Expanded(
-                      child: Text('Thêm vào danh sách yêu thích ',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ))))
-            ],
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.only(top: 10, bottom: 10, left: 2, right: 2),
-          child: Row(
-            children: [
-              Stack(alignment: Alignment.center, children: [
-                Container(
-                  width: 36,
-                  height: 36,
-                  decoration: BoxDecoration(
-                      color: Colors.black12,
-                      borderRadius: BorderRadius.circular(8)),
-                ),
-                IconButton(onPressed: () {}, icon: Icon(Icons.call))
-              ]),
-              Expanded(
-                  child: Text('Liên hệ',
-                      style: TextStyle(
-                        fontSize: 16,
-                      ))),
-            ],
-          ),
-        ),
-        GestureDetector(
-          onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailScreen()));},
-          child: Container(
-            padding: EdgeInsets.only(top: 16),
-            child: Stack(alignment: Alignment.center, children: [
-              Center(
-                child: Container(
-                  width: 350,
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.orange,
-                      borderRadius: BorderRadius.circular(10)),
-                ),
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Đặt sản phẩm',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                        color: Colors.white),
-                  ),
-                  Text(
-                    'Tự đến lấy tại cửa hàng',
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              )
-            ]),
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsCoffeeWidget(storeCoffee: storeCoffees[index])));
+                  },
+                  child: ItemStoreCoffee(store: storeCoffees[index]));
+            },
           ),
         )
-      ],
-    ));
-
+    );
   }
 }
+
